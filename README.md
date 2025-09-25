@@ -4,22 +4,6 @@ A real-time polling platform where teachers create polls and students submit ans
 
 ---
 
-### Table of Contents
-
-- [Features](#-features)
-- [UI](#-ui)
-- [Tech Stack](#-tech-stack)
-- [Project Structure](#-project-structure)
-- [Setup & Installation](#-setup--installation)
-- [Socket Events](#-socket-events)
-- [Screenshots](#-screenshots)
-- [Figma Design Reference](#-figma-design-reference)
-- [Development Notes](#-development-notes)
-- [Contributing](#-contributing)
-- [License](#-license)
-
----
-
 ### 🚀 Features
 
 - **Teacher**
@@ -57,45 +41,13 @@ A real-time polling platform where teachers create polls and students submit ans
 
 ---
 
-### 📂 Project Structure
-
-```startLine:endLine:filepath
-// See repository layout below (trimmed)
-```
-
-```text
-polling-live/
-├── backend/
-│  ├── index.js               # Express + Socket.IO server
-│  ├── package.json
-│  └── package-lock.json
-│
-├── frontend/
-│  ├── src/
-│  │  ├── pages/
-│  │  │  ├── LandingPage.jsx
-│  │  │  ├── TeacherPage.jsx
-│  │  │  └── StudentPage.jsx
-│  │  ├── socket.js           # Socket.IO client
-│  │  ├── App.jsx / main.jsx
-│  │  └── index.css
-│  ├── index.html
-│  ├── vite.config.js
-│  ├── tailwind.config.cjs
-│  └── package.json
-│
-└── README.md
-```
-
----
-
 ### ⚙️ Setup & Installation
 
 1. Clone the repo
 
 ```bash
-git clone https://github.com/your-username/polling-live.git
-cd polling-live
+git clone <your repo url>
+cd <repo name>
 ```
 
 2. Backend setup
@@ -140,25 +92,6 @@ Run both backend and frontend simultaneously in separate terminals.
 
 ---
 
-### 📸 Screenshots
-
-Add screenshots or GIFs of the UI:
-
-- Landing Page
-- Teacher Dashboard
-- Student Dashboard
-
----
-
-### 🎨 Figma Design Reference
-
-Custom UI inspired by Figma mocks. Colors, gradients, and spacing follow the design system.
-
-- Gradient Buttons → `linear-gradient(90deg, #8F64E1 0%, #1D68BD 100%)`
-- Rounded Cards → `border-radius: 10px`
-
----
-
 ### 🧪 Development Notes
 
 - Ensure backend (`http://localhost:4000`) and frontend (`http://localhost:5173`) run simultaneously.
@@ -176,9 +109,3 @@ Custom UI inspired by Figma mocks. Colors, gradients, and spacing follow the des
 3. Commit your changes
 4. Push to your branch
 5. Open a Pull Request 🚀
-
----
-
-### 📜 License
-
-MIT License © 2025 Your Name
