@@ -1,173 +1,184 @@
-📊 Live Polling System
+## 📊 Live Polling System
 
-A real-time polling platform where teachers can create polls and students can submit answers & view live results.
-Built with React, TailwindCSS, Node.js, Express, and Socket.IO.
+A real-time polling platform where teachers create polls and students submit answers and view live results. Built with React, TailwindCSS, Node.js, Express, and Socket.IO.
 
-🚀 Features
-👩‍🏫 Teacher
+---
 
-Create a live session with a unique session ID.
+### Table of Contents
 
-Share the session ID with students to join.
+- [Features](#-features)
+- [UI](#-ui)
+- [Tech Stack](#-tech-stack)
+- [Project Structure](#-project-structure)
+- [Setup & Installation](#-setup--installation)
+- [Socket Events](#-socket-events)
+- [Screenshots](#-screenshots)
+- [Figma Design Reference](#-figma-design-reference)
+- [Development Notes](#-development-notes)
+- [Contributing](#-contributing)
+- [License](#-license)
 
-Create polls with:
+---
 
-Custom question text
+### 🚀 Features
 
-Multiple answer options
+- **Teacher**
 
-Configurable duration (in seconds)
+  - Create a live session with a unique session ID
+  - Share the session ID with students
+  - Create polls with custom question text, multiple options, and configurable duration
+  - See connected students (live list)
+  - Remove a student from the session
+  - Monitor live poll results in real-time
 
-See connected students (live list).
+- **Student**
+  - Join using a session ID
+  - View polls as soon as the teacher starts them
+  - Submit answers in real-time
+  - See aggregated results after voting
 
-Remove a student from the session.
+---
 
-Monitor live poll results in real-time.
+### 💻 UI
 
-👨‍🎓 Student
+- **Responsive design**: mobile and desktop
+- **Landing Page**: Choose role (Teacher / Student)
+- **Teacher Dashboard**: Manage session, create polls, view students and results
+- **Student Dashboard**: Answer polls, see live results
+- **Styling**: TailwindCSS with Figma-inspired UI
 
-Join using a session ID.
+---
 
-View polls as soon as the teacher starts them.
+### 🛠️ Tech Stack
 
-Submit answers in real-time.
+- **Frontend**: React, React Router, TailwindCSS, Vite
+- **Backend**: Node.js, Express
+- **Realtime**: Socket.IO
 
-See live aggregated results after voting.
+---
 
-💻 UI
+### 📂 Project Structure
 
-Responsive design (mobile + desktop).
+```startLine:endLine:filepath
+// See repository layout below (trimmed)
+```
 
-Landing Page: Choose role (Teacher / Student).
-
-Teacher Dashboard: Manage session, create polls, view students & results.
-
-Student Dashboard: Answer polls, see live results.
-
-TailwindCSS + Figma-inspired UI.
-
-🛠️ Tech Stack
-
-Frontend: React, React Router, TailwindCSS
-
-Backend: Node.js, Express
-
-Realtime: Socket.IO
-
-Styling: TailwindCSS + custom CSS (to match Figma)
-
-Build Tool: Vite
-
-📂 Project Structure
-live-polling-system/
+```text
+polling-live/
 ├── backend/
-│ ├── server.js # Express + Socket.IO server
-│ └── package.json
+│  ├── index.js               # Express + Socket.IO server
+│  ├── package.json
+│  └── package-lock.json
 │
 ├── frontend/
-│ ├── src/
-│ │ ├── pages/ # React pages
-│ │ │ ├── LandingPage.jsx
-│ │ │ ├── TeacherPage.jsx
-│ │ │ └── StudentPage.jsx
-│ │ ├── components/ # UI components
-│ │ ├── socket.js # Socket.IO client
-│ │ └── index.css # Tailwind + custom styles
-│ ├── index.html
-│ ├── vite.config.js
-│ └── package.json
+│  ├── src/
+│  │  ├── pages/
+│  │  │  ├── LandingPage.jsx
+│  │  │  ├── TeacherPage.jsx
+│  │  │  └── StudentPage.jsx
+│  │  ├── socket.js           # Socket.IO client
+│  │  ├── App.jsx / main.jsx
+│  │  └── index.css
+│  ├── index.html
+│  ├── vite.config.js
+│  ├── tailwind.config.cjs
+│  └── package.json
 │
 └── README.md
+```
 
-⚙️ Setup & Installation
+---
+
+### ⚙️ Setup & Installation
 
 1. Clone the repo
-   git clone https://github.com/your-username/live-polling-system.git
-   cd live-polling-system
 
-2. Backend Setup
-   cd backend
-   npm install
-   npm run dev # starts backend on http://localhost:4000
+```bash
+git clone https://github.com/your-username/polling-live.git
+cd polling-live
+```
 
-3. Frontend Setup
-   cd frontend
-   npm install
-   npm run dev # starts frontend on http://localhost:5173
+2. Backend setup
 
-🔗 Socket Events
-Teacher
+```bash
+cd backend
+npm install
+npm run dev   # expected at http://localhost:4000
+```
 
-teacher:createSession → Create session, returns sessionId
+3. Frontend setup
 
-teacher:createPoll → Start a new poll
+```bash
+cd ../frontend
+npm install
+npm run dev   # expected at http://localhost:5173
+```
 
-teacher:removeStudent → Remove a student
+Run both backend and frontend simultaneously in separate terminals.
 
-session:closed → When session is terminated
+---
 
-Student
+### 🔗 Socket Events
 
-student:joinSession → Join with sessionId
+- **Teacher**
 
-student:submitAnswer → Submit poll answer
+  - `teacher:createSession` → Create session, returns `sessionId`
+  - `teacher:createPoll` → Start a new poll
+  - `teacher:removeStudent` → Remove a student
+  - `session:closed` → Session terminated
 
-Shared
+- **Student**
 
-students:update → Notify teacher of updated student list
+  - `student:joinSession` → Join with `sessionId`
+  - `student:submitAnswer` → Submit poll answer
 
-poll:started → Notify students of active poll
+- **Shared**
+  - `students:update` → Notify teacher of updated student list
+  - `poll:started` → Notify students of active poll
+  - `poll:partialResults` → Emit partial live results
+  - `poll:ended` → End poll and show results
 
-poll:partialResults → Emit partial live results
+---
 
-poll:ended → End poll & show results
+### 📸 Screenshots
 
-📸 Screenshots
+Add screenshots or GIFs of the UI:
 
-Replace with your actual screenshots (or paste from earlier):
+- Landing Page
+- Teacher Dashboard
+- Student Dashboard
 
-Landing Page
+---
 
-Teacher Dashboard
+### 🎨 Figma Design Reference
 
-Student Dashboard
+Custom UI inspired by Figma mocks. Colors, gradients, and spacing follow the design system.
 
-🎨 Figma Design Reference
+- Gradient Buttons → `linear-gradient(90deg, #8F64E1 0%, #1D68BD 100%)`
+- Rounded Cards → `border-radius: 10px`
 
-Custom UI inspired by Figma mocks.
+---
 
-Colors, gradients, spacing closely follow the design system.
+### 🧪 Development Notes
 
-Example:
+- Ensure backend (`http://localhost:4000`) and frontend (`http://localhost:5173`) run simultaneously.
+- TailwindCSS is used for utility-first styling.
+- For production, consider:
+  - Docker for containerization
+  - Deploy backend on Render/Heroku and frontend on Vercel/Netlify
 
-Gradient Buttons → linear-gradient(90deg,#8F64E1 0%,#1D68BD 100%)
+---
 
-Rounded Cards → border-radius: 10px
+### 🤝 Contributing
 
-🧪 Development Notes
+1. Fork this repo
+2. Create a new branch: `feature/your-feature`
+3. Commit your changes
+4. Push to your branch
+5. Open a Pull Request 🚀
 
-Ensure backend (localhost:4000) and frontend (localhost:5173) run simultaneously.
+---
 
-TailwindCSS is used for utility-first styling.
-
-For production, consider:
-
-Using Docker for containerization.
-
-Deploying backend on Heroku / Render and frontend on Vercel / Netlify.
-
-🤝 Contributing
-
-Fork this repo
-
-Create a new branch (feature/new-feature)
-
-Commit changes
-
-Push to your branch
-
-Open a Pull Request 🚀
-
-📜 License
+### 📜 License
 
 MIT License © 2025 Your Name
