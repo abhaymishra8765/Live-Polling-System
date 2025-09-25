@@ -1,0 +1,235 @@
+/* src/index.css - Tailwind directives + plain CSS for global rules */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* root variables */
+:root {
+  --primary-from: #6B46FF;
+  --primary-to: #7C5CFF;
+  --muted: #6B7280;
+  --dark-gray: #111827;
+}
+
+/* Global styles: use plain CSS instead of @apply for body */
+body {
+  margin: 0;
+  padding: 18px;
+  background-color: #ffffff;      /* same as bg-white */
+  color: var(--dark-gray);        /* text color */
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* small utility for selected role outline */
+.role-selected {
+  box-shadow: 0 0 0 6px rgba(99,102,241,0.10);
+  border-color: rgba(99,102,241,0.35) !important;
+}
+
+/* Continue button - responsive, visually matching Figma */
+.btn-continue {
+  width: 234px;                /* Figma 233.93 -> round to 234 */
+  height: 58px;                /* Figma 57.58 -> round to 58 */
+  border-radius: 30px;         /* pill corners */
+  background: linear-gradient(90deg, #8F64E1 0%, #1D68BD 100%); /* Figma gradient */
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 18px;            /* tweak if Figma shows different size */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 20px rgba(29,104,189,0.22);
+  cursor: pointer;
+  border: none;
+  position: relative;
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+/* slight lift on hover and accessible focus ring */
+.btn-continue:hover { transform: translateY(-3px); }
+.btn-continue:active { transform: translateY(1px); }
+.btn-continue:focus { outline: none; box-shadow: 0 10px 30px rgba(107,70,255,0.18); }
+
+/* glossy highlight */
+.btn-continue.btn-glossy::after{
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(to bottom,
+    rgba(255,255,255,0.18) 0%,
+    rgba(255,255,255,0.06) 30%,
+    rgba(255,255,255,0) 60%);
+  mix-blend-mode: overlay;
+  opacity: 0.9;
+}
+
+
+
+/* container that matches Figma layout width and centers the two cards */
+.cards-wrapper {
+  margin: 0 auto;
+  max-width: 820px;        /* centers and keeps cards narrow like the design */
+  display: grid;
+  grid-template-columns: 1fr;  /* mobile: 1 column */
+  gap: 1.5rem;             /* gap between stacked items on mobile */
+  margin-bottom: 6rem;     /* <-- bigger space between cards and the Continue button */
+}
+
+/* fixed card width on larger screens to match Figma sizes */
+.cards-wrapper .role-card {
+  width: 387px;            /* Figma card width */
+  box-sizing: border-box;
+  margin-left: auto;       /* center within grid cell */
+  margin-right: auto;
+}
+
+/* two column layout at desktop */
+@media (min-width: 768px) {
+  .cards-wrapper {
+    grid-template-columns: repeat(2, 387px); /* two 387px cards side-by-side */
+    justify-content: center;                 /* center the two columns in parent */
+    gap: 2rem;                               /* horizontal gap between columns */
+    margin-bottom: 6.5rem;                   /* slightly more space for desktop */
+  }
+}
+
+@media (max-width: 420px) {
+  .btn-continue { transform: none !important; margin-top: 1rem; }
+}
+
+/* Figma-like small badge (Intervue Poll) */
+.badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #8F64E1 0%, #6B46FF 40%, #1D68BD 100%);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+  box-shadow: 0 4px 10px rgba(27,41,80,0.06);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* icon wrapper inside badge: subtle white + opacity for contrast if needed */
+.badge-pill .badge-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.12);
+}
+
+/* badge text slightly tighter */
+.badge-pill .badge-text {
+  display: inline-block;
+  white-space: nowrap;
+  color: #fff;
+  letter-spacing: 0.2px;
+}
+
+/* optional small responsive tweak: make badge a bit smaller on narrow screens */
+@media (max-width: 420px) {
+  .badge-pill { padding: 5px 10px; font-size: 12px; gap: 6px; }
+  .badge-pill .badge-icon { width: 16px; height: 16px; }
+}
+
+
+/* ---------- Teacher page / Figma helpers ---------- */
+
+/* small badge (Intervue Poll) */
+.badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #8F64E1 0%, #6B46FF 40%, #1D68BD 100%);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+  box-shadow: 0 4px 10px rgba(27,41,80,0.06);
+}
+
+/* default inputs and textareas used in teacher form */
+.input-default {
+  display: block;
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid #E6E6E6;
+  background: #ffffff;
+  color: var(--dark-gray);
+  font-size: 14px;
+  box-sizing: border-box;
+  transition: box-shadow .12s ease, border-color .12s ease;
+}
+.input-default:focus {
+  outline: none;
+  border-color: rgba(107,70,255,0.8);
+  box-shadow: 0 6px 18px rgba(107,70,255,0.08);
+}
+
+/* large question textarea (Figma-style light panel) */
+.textarea-question {
+  display: block;
+  width: 100%;
+  min-height: 120px;
+  padding: 18px;
+  border-radius: 6px;
+  background: #F3F4F6; /* subtle grey panel like Figma */
+  border: 1px solid transparent;
+  box-sizing: border-box;
+  font-size: 15px;
+  color: var(--dark-gray);
+}
+
+/* Buttons */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: linear-gradient(90deg,#8F64E1 0%,#1D68BD 100%);
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 12px 30px rgba(29,104,189,0.12);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  background: transparent;
+  border: 1px solid #E5E7EB;
+  color: #111827;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* small utility card for student list item */
+.student-card {
+  padding: 12px;
+  border-radius: 8px;
+  background: #fff;
+  border: 1px solid #F1F1F1;
+}
+
+/* small responsive tweaks */
+@media (max-width: 768px) {
+  .btn-primary { width: 100%; justify-content: center; }
+}
